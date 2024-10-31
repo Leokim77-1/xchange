@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .back-button {
+            background-color: #ddd;
+            border: none;
+            border-radius: 50px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .back-button span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .transaction-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+            margin-left: 50px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            margin: 80px auto 0;
+        }
+
+        .transaction-box {
+            margin: 0 auto;
+            background-color: lightgray;
+            border-radius: 10px;
+            width: 98.5%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .note {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 80px;
+        }
+
+        .make-transaction-button {
+            background-color: lightcoral;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+
+        .redirect-note {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .mtnlog {
+            background-color: orange;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <button class="back-button" onclick="navigateToAccount()">
+            <span>&larr;</span>
+        </button>
+        <h1 class="transaction-header">Transaction</h1>
+    </div>
+
+    <div class="container">
+        <div class="transaction-box">
+            <div class="mtnlog">MTN</div>
+        </div>
+
+        <div class="note">
+            Note: investments range from 10 Ghana cedis with a limit of 1000 Ghana cedis.
+        </div>
+
+        <button class="make-transaction-button" onclick="makeTransaction()">Make Transaction</button>
+
+        <div class="redirect-note">
+            You will be directed to your phone app with the transaction number copied on your clipboard. Please paste it!
+        </div>
+    </div>
+
+    <script>
+        function navigateToAccount() {
+            // Navigate to Account.html
+            window.location.href = "index.html";
+        }
+
+        function makeTransaction() {
+            // Copy the number to clipboard
+            const phoneNumber = "0541 83 27 98";
+            const el = document.createElement('textarea');
+            el.value = phoneNumber;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            // Alert user that the number has been copied
+            alert("Phone number copied to clipboard: " + phoneNumber);
+
+            // Open the dialer with *170# (USSD code)
+            window.location.href = "tel:*170%23";
+        }
+    </script>
+
+</body>
+</html>
