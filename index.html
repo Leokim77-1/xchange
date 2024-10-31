@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            height: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            color: #ffa500;
+            font-weight: bold;
+        }
+
+        .menu-icon, .search-icon {
+            font-size: 1.5em;
+            color: #888;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 5px 12px;
+            font-size: 0.9em;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s, font-weight 0.3s;
+          
+        }
+
+        .tab.active {
+            color: #000;
+            font-weight: bold;
+            border-bottom: 2px solid #ffa500;
+        }
+
+        /* Main content */
+        .main-content {
+            padding: 20px;
+        }
+
+        .dashboard h2 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background-color: #333;
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .balance-info h3 {
+            font-size: 1.4em;
+            color: #ffa500;
+            margin-top: 5px;
+        }
+
+        .balance-actions {
+            grid-column: span 3;
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .balance-actions a{
+            flex: 1;
+            padding: 10px 130px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            grid-column: span 3;
+              width: 100px;
+            text-decoration: none;
+        }
+
+        .buy-btn {
+            background-color: #ffa500;
+        }
+
+        .view-btn {
+            background-color: #555;
+        }
+
+        .manage-btn {
+            background-color: #777;
+        }
+
+        .balance-actions button:hover {
+            opacity: 0.8;
+        }
+
+        /* Currencies Section */
+        .currencies-section h3 {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .currencies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .currency-card {
+            flex: 1 1 calc(50% - 10px);
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .currency-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .currency-card p:first-child {
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .currency-card p:last-child {
+            font-size: 0.8em;
+            color: #00a000;
+        }
+
+        /* Footer Navigation */
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: #fff;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 80px;
+        }
+
+        .nav-icon {
+            font-size: 1.5em;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
+            bottom: 100%;
+        }
+
+        .nav-icon:hover {
+            color: #000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 400px) {
+            .app-container {
+                border-radius: 0;
+                width: 100%;
+                height: 100vh;
+            }
+        }
+        
+        img{
+          width: 40px;
+        }
+        
+        button{
+          border: none;
+          border-radius:10px;
+        }
+    
+    </style>
+</head>
+<body>
+<script src="time.js"></script>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="menu-icon"></div>
+            <h1>Xchange Coin City</h1>
+                     
+<div class="tab" id="clock">00:00:00 AM</div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+              
+
+                <button class="tab">Cash out Date 28 November,2024.</button>
+                   
+            </div>
+
+            <!-- Dashboard Overview -->
+            <section class="dashboard">
+                <h2>Your Dashboard</h2>
+                <div class="balance-card">
+                    <div class="balance-info">
+                        <p>Balance (GH¢)</p>
+                        <h3>¢0</h3>
+                    </div>
+                    <div class="transaction-info">
+                        <p>Transactions</p>
+                        <p>0</p>
+                    </div>
+                    <div class="wallet-info">
+                        <p>Wallets</p>
+                        <p>1</p>
+                    </div>
+                    <div class="balance-actions">
+                        <button onclick="makeTransaction()"><a href="Tra.html" class="buy-btn" >Buy</a></button>
+
+                    </div>
+                </div>
+
+                <!-- Your Currencies -->
+                <div class="currencies-section">
+                    <h3>Your Tokens</h3>
+                    <div class="currencies">
+                        <div class="currency-card">
+                            <p>Taskcoin</p>
+                            <p>¢0</p>
+                        </div>
+                        <div class="currency-card">
+                            <p>Referal Tokens</p>
+                            <p>¢0</p>
+                        </div>
+                        <div class="currency-card">
+                            <p>Daily coin Reward</p>
+                            <p>¢0</p>
+                        </div>
+                        <!-- Add more currencies as needed -->
+                    </div>
+                            <div class="redirect-note" style="position: absolute;">
+            You will be directed to your phone app with the transaction number copied on your clipboard. Please paste it!
+        </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Navigation -->
+        <footer class="footer">
+            <div class="nav-icon"> <img src="dashboard (1).png" alt="dash"> </div> <div class="nav-icon"> <img src="user (1).png" alt="dash"> </div>
+
+        </footer>
+    </div>
+
+<script>
+  
+ const buy = document.querySelector(".buy-btn");
+  
+          function navigateToAccount() {
+            // Navigate to Account.html
+            window.location.href = "Tra.html";
+        }
+</script>
+
+
+</body>
+</html>
